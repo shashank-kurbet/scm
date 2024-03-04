@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import joblib
 from stqdm import stqdm
+import urllib.request
+
 
 
 # Load the preprocessed data
