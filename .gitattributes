@@ -1,3 +1,4 @@
 SalesFINAL12312016.csv filter=lfs diff=lfs merge=lfs -text
 SalesUpdated.csv filter=lfs diff=lfs merge=lfs -text
 PurchasesFINAL12312016.csv filter=lfs diff=lfs merge=lfs -text
+trained_model.joblib filter=lfs diff=lfs merge=lfs -text
