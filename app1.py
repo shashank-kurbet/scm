@@ -1,12 +1,16 @@
 import streamlit as st
 import pandas as pd
 import joblib
+from stqdm import stqdm
+
 
 # Load the preprocessed data
-df = pd.read_csv('C:/Users/demonking/Downloads/demand forecasting dataset/SalesUpdated.csv')
+raw_csv_url = 'https://raw.githubusercontent.com/shashank-kurbet/scm/main/SalesUpdated.csv'
+df = pd.read_csv(raw_csv_url)
 
 # Load the pre-trained model
-model = joblib.load('trained_model.joblib')
+model_url = 'https://github.com/shashank-kurbet/scm/raw/main/trained_model.joblib'
+model = joblib.load(urllib.request.urlopen(model_url))
 
 # Function to predict monthly quantity
 def predict_monthly_quantity(store, brand, month, year):
@@ -51,8 +55,8 @@ elif button_selection == "Inventory":
     # st.title('Analytics Page')
 
     # Perform calculations for SafetyStock, ReorderPoint, MaxStock, and ActualInventory
-    df_beg_inventory = pd.read_csv('C:/Users/demonking/Downloads/demand forecasting dataset/BegInvFINAL12312016.csv')
-    df_purchases = pd.read_csv('C:/Users/demonking/Downloads/demand forecasting dataset/PurchasesFINAL12312016.csv')
+    df_beg_inventory = pd.read_csv('https://raw.githubusercontent.com/shashank-kurbet/scm/main/BegInvFINAL12312016.csv')
+    df_purchases = pd.read_csv('https://raw.githubusercontent.com/shashank-kurbet/scm/main/PurchasesFINAL12312016.csv')
 
     # Calculate Safety Stock, Reorder Point, and Maximum Stock for df_beg_inventory
     df_beg_inventory['SafetyStock'] = df_beg_inventory['onHand'] * 0.2  # 20% of onHand as Safety Stock
