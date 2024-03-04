@@ -40,22 +40,25 @@ if button_selection == "Home":
     st.title('Monthly Quantity Prediction App')
 
     # User input
-    store = st.selectbox('Select Store')
-    brand = st.selectbox('Select Brand', df['Brand'].unique())
-    month = st.slider('Select Month', 1, 12, 1)
-    selected_year = st.text_input('Enter Year', df['Year'].min())
+    if 'Store' in df.columns:
+        # User input
+        selected_store = st.selectbox('Select Store', df['Store'].unique())
+        brand = st.selectbox('Select Brand', df['Brand'].unique())
+        month = st.slider('Select Month', 1, 12, 1)
+        selected_year = st.text_input('Enter Year', df['Year'].min())
 
-    # Convert the entered year to an integer
-    selected_year = int(selected_year)
+        # Convert the entered year to an integer
+        selected_year = int(selected_year)
 
-    # Predict button
-    if st.button('Predict Monthly Quantity'):
-        # Make prediction
-        prediction = predict_monthly_quantity(store, brand, month, selected_year)
+        # Predict button
+        if st.button('Predict Monthly Quantity'):
+            # Make prediction
+            prediction = predict_monthly_quantity(selected_store, brand, month, selected_year)
 
-        # Display the result
-        st.success(f'Predicted Monthly Quantity: {prediction:.2f}')
-
+            # Display the result
+            st.success(f'Predicted Monthly Quantity: {prediction:.2f}')
+    else:
+        st.error("The 'Store' column is missing in the DataFrame.")
 elif button_selection == "Inventory":
     st.title('Inventory')
     # st.title('Analytics Page')
