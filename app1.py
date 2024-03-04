@@ -2,7 +2,9 @@ import streamlit as st
 import pandas as pd
 import joblib
 from stqdm import stqdm
-import urllib.request
+import io
+import requests
+
 
 
 
@@ -12,7 +14,9 @@ df = pd.read_csv(raw_csv_url)
 
 # Load the pre-trained model
 model_url = 'https://github.com/shashank-kurbet/scm/raw/main/trained_model.joblib'
-model = joblib.load(urllib.request.urlopen(model_url))
+response = requests.get(model_url)
+model = joblib.load(io.BytesIO(response.content))
+
 
 # Function to predict monthly quantity
 def predict_monthly_quantity(store, brand, month, year):
