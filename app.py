@@ -16,7 +16,9 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import accuracy_score
 
 # Load the preprocessed data
-df = pd.read_csv('C:/Users/demonking/Downloads/demand forecasting dataset/SalesFINAL12312016.csv')
+raw_csv_url = 'https://raw.githubusercontent.com/shashank-kurbet/scm/main/SalesFINAL12312016.csv'
+df = pd.read_csv(raw_csv_url)
+
 
 # Convert 'SalesDate' to datetime for better handling
 df['SalesDate'] = pd.to_datetime(df['SalesDate'])
@@ -41,7 +43,7 @@ df['MonthlyDollars'] = df['SalesDollars_grouped']
 df['MonthlyVolume'] = df['Volume_grouped']
 
 # Save the updated dataframe to a new CSV file
-df.to_csv('C:/Users/demonking/Downloads/demand forecasting dataset/SalesUpdated.csv', index=False)
+df.to_csv('https://raw.githubusercontent.com/shashank-kurbet/scm/main/SalesUpdated.csv', index=False)
 
 df = df.drop(['SalesQuantity_grouped', 'SalesDollars_grouped', 'Volume_grouped'], axis=1)
 
