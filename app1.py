@@ -40,7 +40,7 @@ if button_selection == "Home":
     st.title('Monthly Quantity Prediction App')
 
     # User input
-    store = st.selectbox('Select Store', df['Store'].unique())
+    store = st.selectbox('Select Store')
     brand = st.selectbox('Select Brand', df['Brand'].unique())
     month = st.slider('Select Month', 1, 12, 1)
     selected_year = st.text_input('Enter Year', df['Year'].min())
