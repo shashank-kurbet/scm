@@ -9,7 +9,7 @@ import logging
 
 
 
-raw_csv_url = 'https://raw.githubusercontent.com/shashank-kurbet/scm/main/SalesUpdated.csv'
+raw_csv_url = 'https://media.githubusercontent.com/media/shashank-kurbet/scm/main/SalesUpdated.csv'
 try:
     df = pd.read_csv(raw_csv_url)
     logging.info("Data loaded successfully.")
