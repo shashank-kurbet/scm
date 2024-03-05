@@ -30,7 +30,7 @@ except Exception as e:
 # with open("trained_model.joblib", "wb") as f:
 #     f.write(response.content)
 
-model_url = 'https://raw.githubusercontent.com/shashank-kurbet/scm/raw/main/trained_model.joblib'
+model_url = 'https://raw.githubusercontent.com/shashank-kurbet/scm/main/trained_model.joblib'
 try:
     response = requests.get(model_url)
     logging.info("Model downloaded successfully.")
