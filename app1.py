@@ -7,6 +7,8 @@ import requests
 import logging
 import traceback
 import pickle
+import shutil
+
 
 
 
@@ -52,13 +54,12 @@ logging.basicConfig(level=logging.INFO)
 # Load the pre-trained model
 model_url = 'https://github.com/shashank-kurbet/scm/main/trained_model.joblib'
 try:
-    response = requests.get(model_url)
+    response = requests.get(model_url, stream=True)
     logging.info("Model downloaded successfully.")
     
-    # Save the model to a file with pickle
-    with open("trained_model.pkl", "wb") as f:
-        model = pickle.load(io.BytesIO(response.content))
-        pickle.dump(model, f, protocol=pickle.HIGHEST_PROTOCOL)
+    # Save the model to a file using shutil
+    with open("trained_model.joblib", "wb") as f:
+        shutil.copyfileobj(response.raw, f)
     
     logging.info("Model saved successfully.")
 except Exception as e:
@@ -67,7 +68,7 @@ except Exception as e:
 
 # Load the saved model
 try:
-    with open("trained_model.pkl", "rb") as f:
+    with open("trained_model.joblib", "rb") as f:
         model = pickle.load(f)
     logging.info("Model loaded successfully.")
 except Exception as e:
