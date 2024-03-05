@@ -24,7 +24,7 @@ model = joblib.load(io.BytesIO(response.content))
 
 
 # Function to predict monthly quantity
-ef predict_monthly_quantity(store, brand, month, year):
+def predict_monthly_quantity(store, brand, month, year):
     input_data = pd.DataFrame({
         'Store': [store],
         'Brand': [brand],
