@@ -54,15 +54,16 @@ except Exception as e:
 logging.basicConfig(level=logging.INFO)
 
 # Load the pre-trained model
+# model_url = 'https://raw.githubusercontent.com/shashank-kurbet/scm/main/trained_model.joblib'
 model_url = 'https://raw.githubusercontent.com/shashank-kurbet/scm/main/trained_model.joblib'
-try:
-    response = requests.get(model_url)
-    response.raise_for_status()  # Check if the request was successful
+response = requests.get(model_url)
+
+if response.status_code == 200:
     model_content = BytesIO(response.content)
     model = joblib.load(model_content)
     st.success("Model loaded successfully.")
-except Exception as e:
-    st.error(f"Error loading model: {e}")
+else:
+    st.error("Error loading model. Please check your internet connection and the model URL.")
 
 
 
