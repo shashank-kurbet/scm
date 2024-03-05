@@ -56,15 +56,14 @@ logging.basicConfig(level=logging.INFO)
 # Load the pre-trained model
 # model_url = 'https://raw.githubusercontent.com/shashank-kurbet/scm/main/trained_model.joblib'
 model_url = 'https://raw.githubusercontent.com/shashank-kurbet/scm/main/trained_model.joblib'
-response = requests.get(model_url)
-
-if response.status_code == 200:
-    model_content = BytesIO(response.content)
-    model = joblib.load(model_content)
-    st.success("Model loaded successfully.")
-else:
-    st.error("Error loading model. Please check your internet connection and the model URL.")
-
+# model_url = 'https://raw.githubusercontent.com/shashank-kurbet/scm/raw/main/trained_model.joblib'
+try:
+    response = requests.get(model_url)
+    model = joblib.load(io.BytesIO(response.content))
+    logging.info("Model loaded successfully.")
+except Exception as e:
+    logging.error(f"Error loading model: {e}")
+    st.error("Error loading model. Please check your internet connection.")
 
 
 # Function to predict monthly quantity
