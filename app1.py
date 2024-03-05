@@ -18,7 +18,7 @@ except Exception as e:
     st.error("Error loading data. Please check your internet connection.")
 
 # Load the pre-trained model
-model_url = 'https://github.com/shashank-kurbet/scm/raw/main/trained_model.joblib'
+model_url = 'https://github.com/shashank-kurbet/scm/blob/main/trained_model.joblib'
 response = requests.get(model_url)
 model = joblib.load(io.BytesIO(response.content))
 
