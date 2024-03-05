@@ -5,6 +5,7 @@ from stqdm import stqdm
 import io
 import requests
 import logging
+import traceback
 
 
 
@@ -29,7 +30,21 @@ except Exception as e:
 # with open("trained_model.joblib", "wb") as f:
 #     f.write(response.content)
 
-model = joblib.load("trained_model.joblib")
+model_url = 'https://raw.githubusercontent.com/shashank-kurbet/scm/raw/main/trained_model.joblib'
+try:
+    response = requests.get(model_url)
+    logging.info("Model downloaded successfully.")
+    
+    # Save the model to a file
+    with open("trained_model.joblib", "wb") as f:
+        f.write(response.content)
+    
+    model = joblib.load("trained_model.joblib")
+    logging.info("Model loaded successfully.")
+except Exception as e:
+    logging.error(f"Error loading model: {e}")
+    logging.error(traceback.format_exc())  # Print the traceback for debugging
+    st.error("Error loading model. Please check your internet connection and the saved model file.")
 
 
 # Function to predict monthly quantity
