@@ -26,7 +26,7 @@ except Exception as e:
 # except Exception as e:
 #     logging.error(f"Error loading model: {e}")
 #     st.error("Error loading model. Please check your internet connection.")
-with open("https://raw.githubusercontent.com/shashank-kurbet/scm/raw/main/trained_model.joblib", "wb") as f:
+with open("trained_model.joblib", "wb") as f:
     f.write(response.content)
 
 model = joblib.load("trained_model.joblib")
