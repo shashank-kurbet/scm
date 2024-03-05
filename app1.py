@@ -39,7 +39,7 @@ try:
     with open("trained_model.joblib", "wb") as f:
         f.write(response.content)
     
-    model = joblib.load("trained_model.joblib")
+    model = joblib.load("trained_model.joblib", mmap_mode=None, allow_pickle=False)
     logging.info("Model loaded successfully.")
 except Exception as e:
     logging.error(f"Error loading model: {e}")
