@@ -24,7 +24,7 @@ model = joblib.load(io.BytesIO(response.content))
 
 
 # Function to predict monthly quantity
-def predict_monthly_quantity(store, brand, month, year):
+ef predict_monthly_quantity(store, brand, month, year):
     input_data = pd.DataFrame({
         'Store': [store],
         'Brand': [brand],
@@ -45,13 +45,13 @@ if button_selection == "Home":
     st.title('Monthly Quantity Prediction App')
 
     # User input
-    store = st.text_input('Enter Store')
-    brand = st.text_input('Enter Brand')
+    store = st.selectbox('Select Store', df['Store'].unique())
+    brand = st.selectbox('Select Brand', df['Brand'].unique())
     month = st.slider('Select Month', 1, 12, 1)
-    selected_year = st.text_input('Enter Year')
+    selected_year = st.text_input('Enter Year', df['Year'].min())
 
     # Convert the entered year to an integer
-    selected_year = int(selected_year) if selected_year else 0  # Replace 0 with a default value if needed
+    selected_year = int(selected_year)
 
     # Predict button
     if st.button('Predict Monthly Quantity'):
