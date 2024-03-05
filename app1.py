@@ -46,7 +46,10 @@ except Exception as e:
 #     logging.error(traceback.format_exc())  # Print the traceback for debugging
 #     st.error("Error loading model. Please check your internet connection and the saved model file.")
 
-model_url = 'https://github.com/shashank-kurbet/scm/main/trained_model.joblib'
+logging.basicConfig(level=logging.INFO)
+
+# Load the pre-trained model
+model_url = 'https://raw.githubusercontent.com/shashank-kurbet/scm/main/trained_model.joblib'
 try:
     response = requests.get(model_url)
     logging.info("Model downloaded successfully.")
