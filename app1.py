@@ -13,7 +13,7 @@ raw_csv_url = 'https://raw.githubusercontent.com/shashank-kurbet/scm/main/SalesU
 df = pd.read_csv(raw_csv_url)
 
 # Load the pre-trained model
-model_url = 'https://github.com/shashank-kurbet/scm/raw/main/trained_model.joblib'
+model_url = 'https://raw.githubusercontent.com/shashank-kurbet/scm/raw/main/trained_model.joblib'
 response = requests.get(model_url)
 model = joblib.load(io.BytesIO(response.content))
 
