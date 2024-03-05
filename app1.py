@@ -45,11 +45,12 @@ if button_selection == "Home":
     st.title('Monthly Quantity Prediction App')
 
     # User input
-    store = st.selectbox('Select Store', df['Store'].unique())
-    brand = st.selectbox('Select Brand', df['Brand'].unique())
+    store = st.text_input('Enter Store')
+    brand = st.text_input('Enter Brand')
     month = st.slider('Select Month', 1, 12, 1)
-    selected_year = st.text_input('Enter Year', df['Year'].min())
+    selected_year = st.text_input('Enter Year')
 
+    # Convert the entered year to an integer
     # Convert the entered year to an integer
     selected_year = int(selected_year)
 
