@@ -49,15 +49,15 @@ except Exception as e:
 logging.basicConfig(level=logging.INFO)
 
 # Load the pre-trained model
-model_url = 'https://raw.githubusercontent.com/shashank-kurbet/scm/main/trained_model.joblib'
+model_url = 'https://github.com/shashank-kurbet/scm/main/trained_model.joblib'
 try:
     response = requests.get(model_url)
     logging.info("Model downloaded successfully.")
     
-    # Save the model to a file with specified protocol
-    with open("trained_model.joblib", "wb") as f:
-        model = joblib.load(io.BytesIO(response.content))
-        joblib.dump(model, f, protocol=4)
+    # Save the model to a file with pickle
+    with open("trained_model.pkl", "wb") as f:
+        model = pickle.load(io.BytesIO(response.content))
+        pickle.dump(model, f, protocol=pickle.HIGHEST_PROTOCOL)
     
     logging.info("Model saved successfully.")
 except Exception as e:
@@ -66,7 +66,8 @@ except Exception as e:
 
 # Load the saved model
 try:
-    model = joblib.load("trained_model.joblib")
+    with open("trained_model.pkl", "rb") as f:
+        model = pickle.load(f)
     logging.info("Model loaded successfully.")
 except Exception as e:
     logging.error(f"Error loading model: {e}")
