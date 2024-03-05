@@ -18,14 +18,18 @@ except Exception as e:
     st.error("Error loading data. Please check your internet connection.")
 
 # Load the pre-trained model
-model_url = 'https://raw.githubusercontent.com/shashank-kurbet/scm/raw/main/trained_model.joblib'
-try:
-    response = requests.get(model_url)
-    model = joblib.load(io.BytesIO(response.content))
-    logging.info("Model loaded successfully.")
-except Exception as e:
-    logging.error(f"Error loading model: {e}")
-    st.error("Error loading model. Please check your internet connection.")
+# model_url = 'https://raw.githubusercontent.com/shashank-kurbet/scm/raw/main/trained_model.joblib'
+# try:
+#     response = requests.get(model_url)
+#     model = joblib.load(io.BytesIO(response.content))
+#     logging.info("Model loaded successfully.")
+# except Exception as e:
+#     logging.error(f"Error loading model: {e}")
+#     st.error("Error loading model. Please check your internet connection.")
+with open("https://raw.githubusercontent.com/shashank-kurbet/scm/raw/main/trained_model.joblib", "wb") as f:
+    f.write(response.content)
+
+model = joblib.load("trained_model.joblib")
 
 
 # Function to predict monthly quantity
