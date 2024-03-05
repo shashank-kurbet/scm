@@ -30,21 +30,44 @@ except Exception as e:
 # with open("trained_model.joblib", "wb") as f:
 #     f.write(response.content)
 
+# model_url = 'https://github.com/shashank-kurbet/scm/main/trained_model.joblib'
+# try:
+#     response = requests.get(model_url)
+#     logging.info("Model downloaded successfully.")
+    
+#     # Save the model to a file
+#     with open("trained_model.joblib", "wb") as f:
+#         f.write(response.content)
+    
+#     model = joblib.load("trained_model.joblib", mmap_mode=None, allow_pickle=False)
+#     logging.info("Model loaded successfully.")
+# except Exception as e:
+#     logging.error(f"Error loading model: {e}")
+#     logging.error(traceback.format_exc())  # Print the traceback for debugging
+#     st.error("Error loading model. Please check your internet connection and the saved model file.")
+
 model_url = 'https://github.com/shashank-kurbet/scm/main/trained_model.joblib'
 try:
     response = requests.get(model_url)
     logging.info("Model downloaded successfully.")
     
-    # Save the model to a file
+    # Save the model to a file with specified protocol
     with open("trained_model.joblib", "wb") as f:
-        f.write(response.content)
+        model = joblib.load(io.BytesIO(response.content))
+        joblib.dump(model, f, protocol=4)
     
-    model = joblib.load("trained_model.joblib", mmap_mode=None, allow_pickle=False)
+    logging.info("Model saved successfully.")
+except Exception as e:
+    logging.error(f"Error saving model: {e}")
+    st.error("Error saving model. Please check your internet connection and the model URL.")
+
+# Load the saved model
+try:
+    model = joblib.load("trained_model.joblib")
     logging.info("Model loaded successfully.")
 except Exception as e:
     logging.error(f"Error loading model: {e}")
-    logging.error(traceback.format_exc())  # Print the traceback for debugging
-    st.error("Error loading model. Please check your internet connection and the saved model file.")
+    st.error("Error loading model. Please check your internet connection and the model file.")
 
 
 # Function to predict monthly quantity
