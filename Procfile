@@ -1,1 +1,1 @@
-web: streamlit run app2.py
+web: streamlit run app1.py
