@@ -8,6 +8,8 @@ import logging
 import traceback
 import pickle
 import shutil
+from io import BytesIO
+
 
 
 
@@ -54,26 +56,14 @@ logging.basicConfig(level=logging.INFO)
 # Load the pre-trained model
 model_url = 'https://github.com/shashank-kurbet/scm/main/trained_model.joblib'
 try:
-    response = requests.get(model_url, stream=True)
-    logging.info("Model downloaded successfully.")
-    
-    # Save the model to a file using shutil
-    with open("trained_model.joblib", "wb") as f:
-        shutil.copyfileobj(response.raw, f)
-    
-    logging.info("Model saved successfully.")
+    response = requests.get(model_url)
+    response.raise_for_status()  # Check if the request was successful
+    model_content = BytesIO(response.content)
+    model = joblib.load(model_content)
+    st.success("Model loaded successfully.")
 except Exception as e:
-    logging.error(f"Error saving model: {e}")
-    st.error("Error saving model. Please check your internet connection and the model URL.")
+    st.error(f"Error loading model: {e}")
 
-# Load the saved model
-try:
-    with open("trained_model.joblib", "rb") as f:
-        model = pickle.load(f)
-    logging.info("Model loaded successfully.")
-except Exception as e:
-    logging.error(f"Error loading model: {e}")
-    st.error("Error loading model. Please check your internet connection and the model file.")
 
 
 # Function to predict monthly quantity
