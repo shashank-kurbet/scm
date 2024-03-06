@@ -57,15 +57,15 @@ logging.basicConfig(level=logging.INFO)
 
 # Load the pre-trained model
 # model_url = 'https://raw.githubusercontent.com/shashank-kurbet/scm/main/trained_model.joblib'
-model_url = 'https://raw.githubusercontent.com/shashank-kurbet/scm/main/trained_model.joblib'
-# model_url = 'https://raw.githubusercontent.com/shashank-kurbet/scm/raw/main/trained_model.joblib'
-try:
-    response = requests.get(model_url)
-    model = joblib.load(io.BytesIO(response.content))
-    logging.info("Model loaded successfully.")
-except Exception as e:
-    logging.error(f"Error loading model: {e}")
-    st.error("Error loading model. Please check your internet connection.")
+# model_url = 'https://raw.githubusercontent.com/shashank-kurbet/scm/main/trained_model.joblib'
+# # model_url = 'https://raw.githubusercontent.com/shashank-kurbet/scm/raw/main/trained_model.joblib'
+# try:
+#     response = requests.get(model_url)
+#     model = joblib.load(io.BytesIO(response.content))
+#     logging.info("Model loaded successfully.")
+# except Exception as e:
+#     logging.error(f"Error loading model: {e}")
+#     st.error("Error loading model. Please check your internet connection.")
 # model_url = 'https://huggingface.co/shashankkurbet/scmgoa/raw/main/trained_model.joblib'
 # try:
 #     # Load the model directly from Hugging Face Spaces using datasets
@@ -75,6 +75,17 @@ except Exception as e:
 #     logging.error(f"Error loading model: {e}")
 #     st.error("Error loading model. Please check your internet connection.")
 #     st.stop()  # Stop execution if the model loading fails
+model_url = 'https://raw.githubusercontent.com/shashank-kurbet/scm/main/trained_model.joblib'
+try:
+    response = requests.get(model_url)
+    with open('trained_model.joblib', 'wb') as f:
+        f.write(response.content)
+
+    model = joblib.load('trained_model.joblib')
+    logging.info("Model loaded successfully.")
+except Exception as e:
+    logging.error(f"Error loading model: {e}")
+    st.error("Error loading model. Please check your internet connection.")
 
 
 
