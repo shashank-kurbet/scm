@@ -9,6 +9,8 @@ import traceback
 import pickle
 import shutil
 from io import BytesIO
+from datasets import load_from_disk
+
 
 
 
@@ -55,15 +57,25 @@ logging.basicConfig(level=logging.INFO)
 
 # Load the pre-trained model
 # model_url = 'https://raw.githubusercontent.com/shashank-kurbet/scm/main/trained_model.joblib'
+# model_url = 'https://huggingface.co/shashankkurbet/scmgoa/raw/main/trained_model.joblib'
+# # model_url = 'https://raw.githubusercontent.com/shashank-kurbet/scm/raw/main/trained_model.joblib'
+# try:
+#     response = requests.get(model_url)
+#     model = joblib.load(io.BytesIO(response.content))
+#     logging.info("Model loaded successfully.")
+# except Exception as e:
+#     logging.error(f"Error loading model: {e}")
+#     st.error("Error loading model. Please check your internet connection.")
 model_url = 'https://huggingface.co/shashankkurbet/scmgoa/raw/main/trained_model.joblib'
-# model_url = 'https://raw.githubusercontent.com/shashank-kurbet/scm/raw/main/trained_model.joblib'
 try:
-    response = requests.get(model_url)
-    model = joblib.load(io.BytesIO(response.content))
+    # Load the model directly from Hugging Face Spaces using datasets
+    model = load_from_disk(model_url)
     logging.info("Model loaded successfully.")
 except Exception as e:
     logging.error(f"Error loading model: {e}")
     st.error("Error loading model. Please check your internet connection.")
+    st.stop()  # Stop execution if the model loading fails
+
 
 
 # Function to predict monthly quantity
