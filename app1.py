@@ -66,7 +66,7 @@ logging.basicConfig(level=logging.INFO)
 # except Exception as e:
 #     logging.error(f"Error loading model: {e}")
 #     st.error("Error loading model. Please check your internet connection.")
-model_url = 'https://huggingface.com/shashankkurbet/scmgoa/raw/main/trained_model.joblib'
+model_url = 'https://huggingface.co/shashankkurbet/scmgoa/raw/main/trained_model.joblib'
 try:
     # Load the model directly from Hugging Face Spaces using datasets
     model = load_from_disk(model_url)
