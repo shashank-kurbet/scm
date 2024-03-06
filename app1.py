@@ -57,7 +57,7 @@ logging.basicConfig(level=logging.INFO)
 
 # Load the pre-trained model
 # model_url = 'https://raw.githubusercontent.com/shashank-kurbet/scm/main/trained_model.joblib'
-model_url = 'https://huggingface.co/shashankkurbet/scmgoa/main/trained_model.joblib'
+model_url = 'https://huggingface.co/spaces/shashankkurbet/scmgoa/blob/main/trained_model.joblib'
 # model_url = 'https://raw.githubusercontent.com/shashank-kurbet/scm/raw/main/trained_model.joblib'
 try:
     response = requests.get(model_url)
